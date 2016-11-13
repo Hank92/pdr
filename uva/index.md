@@ -86,12 +86,12 @@ The links in the right-most column link directly to the lecture recording on Col
 |26|Oct 24| Monday    | [Lab 7: IBCM][7] ([md][27]) / Tutorial 7: Shell scripting, part 2 (remainder of [here][47], as described on the [tutorials page][40]) | [08: Assembly][88] (assembly language) | [08: Assembly][88], slides [1][88] to [4.10][1080309] ([recording][230]) | |
 |27|Oct 26| Wednesday | | [08: Assembly][88] (assembly language) | [08: Assembly][88], slides [4.10][1080309] to [6.6][1080505] ([recording][231]) | |
 |28|Oct 28| Friday    | | [08: Assembly][88] (assembly language) | [08: Assembly][88], slides [6.6][1080505] to [8.14][1080713] ([recording][232]) | |
-|29|Oct 31| Monday    | [Lab 8: assembly, part 1][8] ([md][28]) / Tutorial 8: the reading [here](https://www.cs.cmu.edu/~fp/courses/15213-s07/misc/asm64-handout.pdf) | [08: Assembly][88], [09: Advanced C++][89] | | |
-|30|Nov 2| Wednesday | | [09: Advanced C++][89] | | |
-|31|Nov 4| Friday    | | [09: Advanced C++][89] | | |
+|29|Oct 31| Monday    | [Lab 8: assembly, part 1][8] ([md][28]) / Tutorial 8: see the information on the [tutorials page](../tutorials/index.html) ([md](../tutorials.md)) | [08: Assembly][88], [09: Advanced C++][89] | [08: Assembly][88], slides [8.15][1080714] to [10.19][1080918] ([recording][233]) | |
+|30|Nov 2| Wednesday | | [09: Advanced C++][89] | [08: Assembly][88], slides [10.17][1080916] to [10.33][1080932] (end); [09: Advanced C++][89], slides [1][89] to [6.4][1090503] ([recording][236]) | |
+|31|Nov 4| Friday    | | [09: Advanced C++][89] | [09: Advanced C++][89], slides [6.4][1090503] to [6.22][1090521] ([recording][237]) | |
 ||Nov 6|Sunday| |Exam 2 review session| | |
-|32|Nov 7| Monday    | Exam 2 instead during Tuesday's lab | [10: Heaps and Huffman coding][90] | | |
-|33|Nov 9| Wednesday | | [10: Heaps and Huffman coding][90] | | |
+|32|Nov 7| Monday    | Exam 2 instead during Tuesday's lab | [10: Heaps and Huffman coding][90] | [09: Advanced C++][89], slides [7][10906] to [8.12][1090711] (end); [10: Heaps and Huffman][90], slides [1][90] to [4.4][1100303] ([recording][240]) | |
+|33|Nov 9| Wednesday | | [10: Heaps and Huffman coding][90] | [10: Heaps and Huffman][90], slides [5][11004] to [6.11][1100510] ([recording][241]) | |
 |34|Nov 11| Friday    | | [10: Heaps and Huffman coding][90] | | |
 |35|Nov 14| Monday    | [Lab 9: assembly, part 2][9] ([md][29]) / [Tutorial 9: C][49] ([md][69]) | [10: Heaps and Huffman coding][90], [11: Graphs][91] | | |
 |36|Nov 16| Wednesday | | [11: Graphs][91] | | |
@@ -127,7 +127,7 @@ None yet!
 [5]: ../labs/lab05/index.html
 [6]: ../labs/lab06/index.html
 [7]: ../labs/lab07/index.html
-[8]: ../labs/lab08/index.html
+[8]: ../labs/lab08-64bit/index.html
 [9]: ../labs/lab09/index.html
 [10]: ../labs/lab10/index.html
 [11]: ../labs/lab11/index.html
@@ -140,7 +140,7 @@ None yet!
 [25]: ../labs/lab05/index.md
 [26]: ../labs/lab06/index.md
 [27]: ../labs/lab07/index.md
-[28]: ../labs/lab08/index.md
+[28]: ../labs/lab08-64bit/index.md
 [29]: ../labs/lab09/index.md
 [30]: ../labs/lab10/index.md
 [31]: ../labs/lab11/index.md
@@ -159,8 +159,10 @@ None yet!
 [50]: ../tutorials/10-objc/index.html
 [51]: ../tutorials/11-doxygen/index.html
 [52]: ../tutorials/02-gdb/index.html
-[53]: ../book/x86-asm-chapter.pdf
-[54]: ../book/x86-ccc-chapter.pdf
+[53]: ../book/x86-32bit-asm-chapter.pdf
+[54]: ../book/x86-32bit-ccc-chapter.pdf
+[55]: ../book/x86-64bit-asm-chapter.pdf
+[56]: ../book/x86-64bit-ccc-chapter.pdf
 
 [61]: ../tutorials/01-intro-unix/index.md
 [62]: ../tutorials/02-lldb/index.md
@@ -464,6 +466,7 @@ None yet!
 [1080609]: ../slides/08-assembly-64bit.html#/6/9
 [10807]: ../slides/08-assembly-64bit.html#/7
 [1080713]: ../slides/08-assembly-64bit.html#/7/13
+[1080714]: ../slides/08-assembly-64bit.html#/7/14
 [10808]: ../slides/08-assembly-64bit.html#/8
 [1080804]: ../slides/08-assembly-64bit.html#/8/4
 [1080805]: ../slides/08-assembly-64bit.html#/8/5
@@ -472,6 +475,8 @@ None yet!
 [1080908]: ../slides/08-assembly-64bit.html#/9/8
 [1080914]: ../slides/08-assembly-64bit.html#/9/14
 [1080915]: ../slides/08-assembly-64bit.html#/9/15
+[1080916]: ../slides/08-assembly-64bit.html#/9/16
+[1080918]: ../slides/08-assembly-64bit.html#/9/18
 [1080929]: ../slides/08-assembly-64bit.html#/9/29
 [1080930]: ../slides/08-assembly-64bit.html#/9/30
 [1080932]: ../slides/08-assembly-64bit.html#/9/32
@@ -479,6 +484,7 @@ None yet!
 [1090308]: ../slides/09-advanced-cpp.html#/3/8
 [1090408]: ../slides/09-advanced-cpp.html#/4/8
 [10905]: ../slides/09-advanced-cpp.html#/5
+[1090503]: ../slides/09-advanced-cpp.html#/5/3
 [1090508]: ../slides/09-advanced-cpp.html#/5/8
 [1090509]: ../slides/09-advanced-cpp.html#/5/9
 [1090518]: ../slides/09-advanced-cpp.html#/5/18
@@ -489,6 +495,8 @@ None yet!
 [1090708]: ../slides/09-advanced-cpp.html#/7/8
 [1090710]: ../slides/09-advanced-cpp.html#/7/10
 [1090711]: ../slides/09-advanced-cpp.html#/7/11
+[1100303]: ../slides/10-heaps-huffman.html#/3/3
+[11004]: ../slides/10-heaps-huffman.html#/4
 [1100406]: ../slides/10-heaps-huffman.html#/4/6
 [1100407]: ../slides/10-heaps-huffman.html#/4/7
 [1100408]: ../slides/10-heaps-huffman.html#/4/8
@@ -496,6 +504,7 @@ None yet!
 [1100501]: ../slides/10-heaps-huffman.html#/5/1
 [1100503]: ../slides/10-heaps-huffman.html#/5/3
 [1100508]: ../slides/10-heaps-huffman.html#/5/8
+[1100510]: ../slides/10-heaps-huffman.html#/5/10
 [1100512]: ../slides/10-heaps-huffman.html#/5/12
 [1100515]: ../slides/10-heaps-huffman.html#/5/15
 [1100605]: ../slides/10-heaps-huffman.html#/6/5

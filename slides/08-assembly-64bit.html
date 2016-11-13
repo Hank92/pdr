@@ -126,10 +126,10 @@
   - More than 95% of it is the same
 	  </script></section>
 
-	  <section data-markdown><script type="text/template">
-## IBCM vs. x86: Registers
-![x86 registers](images/08-x86/registers_x86_64bit.png)
-	  </script></section>
+	  <section>
+<h2>IBCM vs. x86: Registers</h2>
+<img src="images/08-x86/registers_x86_64bit.png" class="stretch">
+	  </section>
 
 	  <section data-markdown><script type="text/template">
 ## Funny register names
@@ -767,12 +767,17 @@ int main() {
 	  <section data-markdown><script type="text/template">
 ## Caller Rules Example
 ```
+; Want to call a function "myFunc" that takes three
+; integer parameters. First parameter is in rax.
+; Second parameter is the constant 123. Third
+; parameter is in memory location "var"
+
 push rdi         ; rdi will be a param, so saving it
 
                  ; long retVal = myFunc(x, 123, z);
-mov rdi, [x]     ; put first param in rdi
-mov rsi, rax     ; put second param in rsi
-mov rdx, [z]     ; put third param in rdx
+mov rdi, rax     ; put first param in rdi
+mov rsi, 123     ; put second param in rsi
+mov rdx, [var]   ; put third param in rdx
 
 call myFunc      ; call the function
 
@@ -944,8 +949,8 @@ push rbp        ; both will be used by myFunc
 ```
                      ; subroutine body
 mov rax, rdi	     ; param 1 to rax
-mov rbp, rsi 	    ; param 2 to rbp
-mov rbx, rdx    	 ; param 3 to rbx
+mov rbp, rsi         ; param 2 to rbp
+mov rbx, rdx         ; param 3 to rbx
 mov [rsp+16], rbx    ; put rbx into local var
 add [rsp+16], rbp    ; add rbp into local var
 mov rax, [rsp+16]    ; mov contents of local var to rax
@@ -1028,17 +1033,17 @@ ret             ; pop top value from stack, jump there
 		<table class="transparent" style="padding:0;spacing:0;border-spacing:0;border-collapse:collapse">
 		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>sub rsp, 8</code></pre></td>         <td><span class="fragment" data-fragment-index="1"><span class="fragment fade-out" data-fragment-index="3"><span style="font-size:larger">&larr;</span></span></span></td></tr>
 		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>push rbx</code></pre></td>     <td><span class="fragment" data-fragment-index="3"><span class="fragment fade-out" data-fragment-index="5"><span style="font-size:larger">&larr;</span></span></span></td></tr>
-		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>push rbp</code></pre></td>       <td><span class="fragment" data-fragment-index="5"><span class="fragment fade-out" data-fragment-index="8"><span style="font-size:larger">&larr;</span></span></span></td></tr>
-		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>mov rax, rdi</code></pre></td>         <td><span class="fragment" data-fragment-index="8"><span class="fragment fade-out" data-fragment-index="10"><span style="font-size:larger">&larr;</span></span></span></td></tr>
-		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>mov rbp, rsi</code></pre></td>         <td><span class="fragment" data-fragment-index="10"><span class="fragment fade-out" data-fragment-index="12"><span style="font-size:larger">&larr;</span></span></span></td></tr>
-		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>mov rbx, rdx</code></pre></td> <td><span class="fragment" data-fragment-index="12"><span class="fragment fade-out" data-fragment-index="14"><span style="font-size:larger">&larr;</span></span></span></td></tr>
-		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>mov [rsp+16], rbx</code></pre></td><td><span class="fragment" data-fragment-index="14"><span class="fragment fade-out" data-fragment-index="16"><span style="font-size:larger">&larr;</span></span></span></td></tr>
-		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>add [rsp+16], rbp</code></pre></td><td><span class="fragment" data-fragment-index="16"><span class="fragment fade-out" data-fragment-index="18"><span style="font-size:larger">&larr;</span></span></span></td></tr>
-		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>mov rax, [rsp+16]</code></pre></td> <td><span class="fragment" data-fragment-index="18"><span class="fragment fade-out" data-fragment-index="20"><span style="font-size:larger">&larr;</span></span></span></td></tr>
-		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>pop rbp</code></pre></td> <td><span class="fragment" data-fragment-index="20"><span class="fragment fade-out" data-fragment-index="22"><span style="font-size:larger">&larr;</span></span></span></td></tr>
-		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>pop rbx</code></pre></td> <td><span class="fragment" data-fragment-index="22"><span class="fragment fade-out" data-fragment-index="24"><span style="font-size:larger">&larr;</span></span></span></td></tr>
-		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>add rsp, 8</code></pre></td>          <td><span class="fragment" data-fragment-index="24"><span class="fragment fade-out" data-fragment-index="26"><span style="font-size:larger">&larr;</span></span></span></td></tr>
-		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>ret</code></pre></td>          <td><span class="fragment" data-fragment-index="26"><span class="fragment fade-out" data-fragment-index="28"><span style="font-size:larger">&larr;</span></span></span></td></tr>
+		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>push rbp</code></pre></td>       <td><span class="fragment" data-fragment-index="5"><span class="fragment fade-out" data-fragment-index="7"><span style="font-size:larger">&larr;</span></span></span></td></tr>
+		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>mov rax, rdi</code></pre></td>         <td><span class="fragment" data-fragment-index="7"><span class="fragment fade-out" data-fragment-index="9"><span style="font-size:larger">&larr;</span></span></span></td></tr>
+		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>mov rbp, rsi</code></pre></td>         <td><span class="fragment" data-fragment-index="9"><span class="fragment fade-out" data-fragment-index="11"><span style="font-size:larger">&larr;</span></span></span></td></tr>
+		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>mov rbx, rdx</code></pre></td> <td><span class="fragment" data-fragment-index="11"><span class="fragment fade-out" data-fragment-index="13"><span style="font-size:larger">&larr;</span></span></span></td></tr>
+		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>mov [rsp+16], rbx</code></pre></td><td><span class="fragment" data-fragment-index="13"><span class="fragment fade-out" data-fragment-index="15"><span style="font-size:larger">&larr;</span></span></span></td></tr>
+		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>add [rsp+16], rbp</code></pre></td><td><span class="fragment" data-fragment-index="15"><span class="fragment fade-out" data-fragment-index="17"><span style="font-size:larger">&larr;</span></span></span></td></tr>
+		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>mov rax, [rsp+16]</code></pre></td> <td><span class="fragment" data-fragment-index="17"><span class="fragment fade-out" data-fragment-index="19"><span style="font-size:larger">&larr;</span></span></span></td></tr>
+		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>pop rbp</code></pre></td> <td><span class="fragment" data-fragment-index="19"><span class="fragment fade-out" data-fragment-index="21"><span style="font-size:larger">&larr;</span></span></span></td></tr>
+		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>pop rbx</code></pre></td> <td><span class="fragment" data-fragment-index="21"><span class="fragment fade-out" data-fragment-index="23"><span style="font-size:larger">&larr;</span></span></span></td></tr>
+		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>add rsp, 8</code></pre></td>          <td><span class="fragment" data-fragment-index="23"><span class="fragment fade-out" data-fragment-index="25"><span style="font-size:larger">&larr;</span></span></span></td></tr>
+		  <tr><td><pre style="margin-top:0px;margin-bottom:0px"><code>ret</code></pre></td>          <td><span class="fragment" data-fragment-index="25"><span class="fragment fade-out" data-fragment-index="27"><span style="font-size:larger">&larr;</span></span></span></td></tr>
 		</table>
 	    </td></tr>
 	  </table>
@@ -1054,40 +1059,37 @@ ret             ; pop top value from stack, jump there
 	    <tr>
 	      <td style="vertical-align:top">
 		<div style="position:relative;left:0;top:0">
-		  <img alt="cc animation" class="fragment fade-out" data-fragment-index="2" src="x86/x86-cc-stack-64.dot.3.svg" style="position:relative;left:0px;top:0px">
-		  <span class="fragment fade-out" data-fragment-index="4"><img alt="cc animation" class="fragment" data-fragment-index="2" src="x86/x86-cc-stack-64.dot.4.svg" style="position:absolute;left:0;top:0px"></span>
-		  <span class="fragment fade-out" data-fragment-index="6"><img alt="cc animation" class="fragment" data-fragment-index="4" src="x86/x86-cc-stack-64.dot.5.svg" style="position:absolute;left:0;top:0"></span>
-		  <span class="fragment fade-out" data-fragment-index="15"><img alt="cc animation" class="fragment" data-fragment-index="6" src="x86/x86-cc-stack-64.dot.6.svg" style="position:absolute;left:0;top:0"></span>
-		  <span class="fragment fade-out" data-fragment-index="17"><img alt="cc animation" class="fragment" data-fragment-index="15" src="x86/x86-cc-stack-64.dot.7.svg" style="position:absolute;left:0;top:0"></span>
-		  <span class="fragment fade-out" data-fragment-index="21"><img alt="cc animation" class="fragment" data-fragment-index="17" src="x86/x86-cc-stack-64.dot.8.svg" style="position:absolute;left:0;top:0"></span>
-		  <span class="fragment fade-out" data-fragment-index="23"><img alt="cc animation" class="fragment" data-fragment-index="21" src="x86/x86-cc-stack-64.dot.9.svg" style="position:absolute;left:0;top:0"></span>
-		  <span class="fragment fade-out" data-fragment-index="25"><img alt="cc animation" class="fragment" data-fragment-index="23" src="x86/x86-cc-stack-64.dot.10.svg" style="position:absolute;left:0;top:0"></span>
-		  <img alt="cc animation" class="fragment" data-fragment-index="25" src="x86/x86-cc-stack-64.dot.11.svg" style="position:absolute;left:0;top:0"></span>
+		  <img alt="cc animation" class="fragment fade-out" data-fragment-index="2" src="x86/64bit/x86-cc-stack.dot.3.svg" style="position:relative;left:0px;top:0px">
+		  <span class="fragment fade-out" data-fragment-index="4"><img alt="cc animation" class="fragment" data-fragment-index="2" src="x86/64bit/x86-cc-stack.dot.4.svg" style="position:absolute;left:0;top:0px"></span>
+		  <span class="fragment fade-out" data-fragment-index="6"><img alt="cc animation" class="fragment" data-fragment-index="4" src="x86/64bit/x86-cc-stack.dot.5.svg" style="position:absolute;left:0;top:0"></span>
+		  <span class="fragment fade-out" data-fragment-index="14"><img alt="cc animation" class="fragment" data-fragment-index="6" src="x86/64bit/x86-cc-stack.dot.6.svg" style="position:absolute;left:0;top:0"></span>
+		  <span class="fragment fade-out" data-fragment-index="16"><img alt="cc animation" class="fragment" data-fragment-index="14" src="x86/64bit/x86-cc-stack.dot.7.svg" style="position:absolute;left:0;top:0"></span>
+		  <img alt="cc animation" class="fragment" data-fragment-index="16" src="x86/64bit/x86-cc-stack.dot.8.svg" style="position:absolute;left:0;top:0">
 		</div>
 	      </td>
 	      
 	      <td style="vertical-align:top">
 		<div style="position:relative;left:0;top:0">
-		  <img alt="cc animation" class="fragment fade-out" data-fragment-index="2" src="x86/x86-cc-esp-64.dot.3.svg" style="position:relative;left:0;top:0">
-		  <span class="fragment fade-out" data-fragment-index="4"><img alt="cc animation" class="fragment" data-fragment-index="2" src="x86/x86-cc-esp-64.dot.4.svg" style="position:absolute;left:0;top:0"></span>
-		  <span class="fragment fade-out" data-fragment-index="6"><img alt="cc animation" class="fragment" data-fragment-index="4" src="x86/x86-cc-esp-64.dot.5.svg" style="position:absolute;left:0;top:0"></span>
-		  <span class="fragment fade-out" data-fragment-index="7"><img alt="cc animation" class="fragment" data-fragment-index="6" src="x86/x86-cc-esp-64.dot.6.svg" style="position:absolute;left:0;top:0"></span>
-		  <span class="fragment fade-out" data-fragment-index="21"><img alt="cc animation" class="fragment" data-fragment-index="7" src="x86/x86-cc-esp-64.dot.7.svg" style="position:absolute;left:0;top:0"></span>
-		  <span class="fragment fade-out" data-fragment-index="23"><img alt="cc animation" class="fragment" data-fragment-index="21" src="x86/x86-cc-esp-64.dot.5.svg" style="position:absolute;left:0;top:0"></span>
-		  <span class="fragment fade-out" data-fragment-index="25"><img alt="cc animation" class="fragment" data-fragment-index="23" src="x86/x86-cc-esp-64.dot.4.svg" style="position:absolute;left:0;top:0"></span>
-		  <img alt="cc animation" class="fragment" data-fragment-index="25" src="x86/x86-cc-esp-64.dot.3.svg" style="position:absolute;left:0;top:0">
+		  <img alt="cc animation" class="fragment fade-out" data-fragment-index="2" src="x86/64bit/x86-cc-rsp.dot.3.svg" style="position:relative;left:0;top:0">
+		  <span class="fragment fade-out" data-fragment-index="4"><img alt="cc animation" class="fragment" data-fragment-index="2" src="x86/64bit/x86-cc-rsp.dot.4.svg" style="position:absolute;left:0;top:0"></span>
+		  <span class="fragment fade-out" data-fragment-index="6"><img alt="cc animation" class="fragment" data-fragment-index="4" src="x86/64bit/x86-cc-rsp.dot.5.svg" style="position:absolute;left:0;top:0"></span>
+		  <span class="fragment fade-out" data-fragment-index="20"><img alt="cc animation" class="fragment" data-fragment-index="6" src="x86/64bit/x86-cc-rsp.dot.6.svg" style="position:absolute;left:0;top:0"></span>
+		  <span class="fragment fade-out" data-fragment-index="22"><img alt="cc animation" class="fragment" data-fragment-index="20" src="x86/64bit/x86-cc-rsp.dot.5.svg" style="position:absolute;left:0;top:0"></span>
+		  <span class="fragment fade-out" data-fragment-index="24"><img alt="cc animation" class="fragment" data-fragment-index="22" src="x86/64bit/x86-cc-rsp.dot.4.svg" style="position:absolute;left:0;top:0"></span>
+		  <span class="fragment fade-out" data-fragment-index="26"><img alt="cc animation" class="fragment" data-fragment-index="24" src="x86/64bit/x86-cc-rsp.dot.3.svg" style="position:absolute;left:0;top:0"></span>
+		  <img alt="cc animation" class="fragment" data-fragment-index="26" src="x86/64bit/x86-cc-rsp.dot.2.svg" style="position:absolute;left:0;top:0">
 		</div>
 	      </td>
 
 	      <td style="vertical-align:top">
 		<div style="position:relative;left:0;top:0">
-		  <img alt="cc animation" class="fragment fade-out" data-fragment-index="9" src="x86/x86-cc-regs-64.dot.svg" style="position:relative;left:0;top:0">
-		  <span class="fragment fade-out" data-fragment-index="11"><img alt="cc animation" class="fragment" data-fragment-index="9" src="x86/x86-cc-regs-64.dot.2.svg" style="position:absolute;left:0;top:0"></span>
-		  <span class="fragment fade-out" data-fragment-index="13"><img alt="cc animation" class="fragment" data-fragment-index="11" src="x86/x86-cc-regs-64.dot.3.svg" style="position:absolute;left:0;top:0"></span>
-		  <span class="fragment fade-out" data-fragment-index="19"><img alt="cc animation" class="fragment" data-fragment-index="13" src="x86/x86-cc-regs-64.dot.4.svg" style="position:absolute;left:0;top:0"></span>
-		  <span class="fragment fade-out" data-fragment-index="21"><img alt="cc animation" class="fragment" data-fragment-index="19" src="x86/x86-cc-regs-64.dot.5.svg" style="position:absolute;left:0;top:0"></span>
-		  <span class="fragment fade-out" data-fragment-index="23"><img alt="cc animation" class="fragment" data-fragment-index="21" src="x86/x86-cc-regs-64.dot.6.svg" style="position:absolute;left:0;top:0"></span>
-		  <img alt="cc animation" class="fragment" data-fragment-index="23" src="x86/x86-cc-regs-64.dot.7.svg" style="position:absolute;left:0;top:0">
+		  <img alt="cc animation" class="fragment fade-out" data-fragment-index="8" src="x86/64bit/x86-cc-regs.dot.svg" style="position:relative;left:0;top:0">
+		  <span class="fragment fade-out" data-fragment-index="10"><img alt="cc animation" class="fragment" data-fragment-index="8" src="x86/64bit/x86-cc-regs.dot.2.svg" style="position:absolute;left:0;top:0"></span>
+		  <span class="fragment fade-out" data-fragment-index="12"><img alt="cc animation" class="fragment" data-fragment-index="10" src="x86/64bit/x86-cc-regs.dot.3.svg" style="position:absolute;left:0;top:0"></span>
+		  <span class="fragment fade-out" data-fragment-index="18"><img alt="cc animation" class="fragment" data-fragment-index="12" src="x86/64bit/x86-cc-regs.dot.4.svg" style="position:absolute;left:0;top:0"></span>
+		  <span class="fragment fade-out" data-fragment-index="20"><img alt="cc animation" class="fragment" data-fragment-index="18" src="x86/64bit/x86-cc-regs.dot.5.svg" style="position:absolute;left:0;top:0"></span>
+		  <span class="fragment fade-out" data-fragment-index="22"><img alt="cc animation" class="fragment" data-fragment-index="20" src="x86/64bit/x86-cc-regs.dot.6.svg" style="position:absolute;left:0;top:0"></span>
+		  <img alt="cc animation" class="fragment" data-fragment-index="22" src="x86/64bit/x86-cc-regs.dot.7.svg" style="position:absolute;left:0;top:0">
 		</div>
 	      </td>
 	    </tr>
@@ -1097,6 +1099,17 @@ ret             ; pop top value from stack, jump there
       </tr>
     </table>
 	  </section>
+
+	  <section data-markdown><script type="text/template">
+## That subroutine, again
+- We fully realize that the previous assembly method could be written as:
+```
+mov rax, rdx
+add rax, rsi
+ret
+```
+- The long-winded-ness of the previous inefficient version was to show how the calling convention works, not to showcase our assembly writing skills
+	  </script></section>
 
 
 	</section>
@@ -1124,7 +1137,7 @@ ret             ; pop top value from stack, jump there
 </ul></li>
 </ul>
 </td><td style="width:50%">
-<img alt="x86 activation record" src="images/08-x86/x86-activation-record.svg">
+<img alt="x86 activation record" src="images/08-x86/x86-64bit-activation-record.svg">
 </td></tr></table>
 	  </section>
 
@@ -1161,14 +1174,12 @@ ret             ; pop top value from stack, jump there
   <td class="border">&nbsp;rsi (8)&nbsp;</td>
   <td class="border">&nbsp;rdi (8)&nbsp;</td>
   <td class="border">&nbsp;buffer (12)&nbsp;</td>
-  <td class="border">&nbsp;rbp (8)&nbsp;</td>
   <td class="border">&nbsp;ret addr (8)&nbsp;</td>
 </tr></table>
 <ul>
 <li>Addresses increase to the right (the stack grows to the left)</li>
 <li class="fragment">What happens if the value stored into buffer is 13 bytes long?</li>
-<li class="fragment">What happens if the value stored into buffer is 20 bytes long?</li>
-<li class="fragment">What if it is exactly 28 bytes long?<ul>
+<li class="fragment">What happens if the value stored into buffer is 20 bytes long?<ul>
     <li class="fragment">We overwrite the return address!</li>
 </ul></li>
 </ul>
@@ -1199,8 +1210,8 @@ ret             ; pop top value from stack, jump there
 - The x86 code samples in this slide set are either:
   - "Generic" x86 examples that could work in nasm if put into a proper program
     - In the same way that you have seen C++ code snippets
-  - Or the output from "clang++ -S" or "g++ -S" (and probably some other flags)
-    - This code will *NOT* work with nasm, but will work with clang++/g++ (which we aren't really using to compile our assembly anyway)
+  - Or the output from "clang++ -S" (and some other flags)
+    - This code will *NOT* work with nasm, but will work with clang++ (which we aren't really using to compile our assembly anyway)
 	  </script></section>
 
 	  <section data-markdown><script type="text/template">
@@ -1219,7 +1230,7 @@ Code we'll see:
 ## int absolute_value(int x)
 (see next slide for the source code link)
 ```
-int absolute_value(int x) {
+long absolute_value(long x) {
     if ( x < 0 )        // if x is negative
         x = -x;    // negate x
     return x;      // return x
@@ -1257,10 +1268,10 @@ int main() {
 No external source code; this is how we might write it ourselves.
 ```
 ; prologue, nothing here because no saved
-; registers and no loval vars
+; registers and no local vars
 
 ; procedure body
-mov rax, rdi    	  ; eax <- x
+mov rax, rdi    	  ; rax <- x
 cmp rax, 0            ; x == 0 ?
 jge end_of_proc       ; if pos goto end
 neg rax               ; negate x
@@ -1286,17 +1297,6 @@ clang++ -m64 -S test_abs.cpp -o test_abs-non-intel.s
 	  </script></section>
 
 	  <section data-markdown><script type="text/template">
-## clang++ flags
-- Most of the code in this section uses the following compiler flags: `-m64 -mllvm --x86-asm-syntax=intel -S -fomit-frame-pointer`
-- The meanings:
-  - `-m64`: create 64-bit code (clang++ sometimes defaults to 32-bit code)
-  - `-mllvm --x86-asm-syntax=intel`: this tells clang++ to generate the assembly in the format we are studying
-  - `-S`: generates assembly, rather than compiling it into object code (or an executable)
-  - `-fomit-frame-pointer`: prevents the push rbp / mov rbp, rsp / pop rbp code discussed [here](#/pushrbp)
-- The assembly shown in this slide set was all generated using clang++ (or clang)
-	  </script></section>
-
-	  <section data-markdown><script type="text/template">
 ## clang++'s assembly for absolute_value
 Note the source / destination order is reversed!  And lots of other differences...
 
@@ -1319,16 +1319,17 @@ absolute_value:
 	  <section data-markdown><script type="text/template">
 ## Assembly differences
 - There are a lot of differences between the assembly we've seen and what `clang++ -O2 -S -fomit-frame-pointer` produces
+  - The source / destination order is reversed
   - `movq`, `sarq`, `xorq` etc.
     - the 'q' part means 'quadword' (i.e. 64 bits, so the assembler doesn't have to guess)
   - `$0` is the constant 0
   - Register names begin with a percent sign
-  - `8(%rbp)` is [rbp+8] (though we did not see this one here)
+  - `-8(%rsp)` is [rsp-8]
 	  </script></section>
 
 	  <section data-markdown><script type="text/template">
 ## Assembly syntax "flavors"
-- There are two primary syntax "flavors" of x86 assmembly
+- There are two primary syntax "flavors" of x86 assembly
   - The difference is solely in the formatting; all assembly commands can be written in either format
   - You can see more details about the differences [here](https://en.wikipedia.org/wiki/X86_assembly_language#Syntax)
 - Flavors:
@@ -1342,7 +1343,18 @@ clang++ -m64 -mllvm --x86-asm-syntax=intel -S \
 	  </script></section>
 
 	  <section data-markdown><script type="text/template">
-## clang++'s asmsembly for absolute_value
+## clang++ flags
+- Most of the code in this section uses the following compiler flags: `-m64 -mllvm --x86-asm-syntax=intel -S -fomit-frame-pointer`
+- The meanings:
+  - `-m64`: create 64-bit code (clang++ sometimes defaults to 32-bit code)
+  - `-mllvm --x86-asm-syntax=intel`: this tells clang++ to generate the assembly in the format we are studying
+  - `-S`: generates assembly, rather than compiling it into object code (or an executable)
+  - `-fomit-frame-pointer`: prevents the push rbp / mov rbp, rsp / pop rbp code discussed [here](#/pushrbp)
+- The assembly shown in this slide set was all generated using clang++ (or clang)
+	  </script></section>
+
+	  <section data-markdown><script type="text/template">
+## clang++'s assembly for absolute_value
 This is with the `-mllvm --x86-asm-syntax=intel` flags
 
 Source code: [test_abs.s](code/08-assembly-64bit/test_abs.s.html) ([src](code/08-assembly-64bit/test_abs.s))
@@ -1372,7 +1384,7 @@ absolute_value:
 	  </script></section>
 
 	  <section data-markdown><script type="text/template">
-## clang++'s asmsembly for ints
+## clang++'s assembly for ints
 This is for [test_abs_int.cpp](code/08-assembly-64bit/test_abs_int.cpp.html), which uses `int` types instead of `long` types
 
 Source code: [test_abs_int.s](code/08-assembly-64bit/test_abs_int.s.html) ([src](code/08-assembly-64bit/test_abs_int.s))
@@ -1504,7 +1516,7 @@ max:
 ```
 The [cmovg](http://www.asmpedia.org/index.php?title=CMOVG) opcode (conditional move if greater than) will move the greater value into the first parameter; [cmovge](http://www.asmpedia.org/index.php?title=CMOVGE) does the move greater than *or equal to* value
 
-Note that this code uses the 32-bit versions of the registers because the variables were decalred as `int` rather than `long`.
+Note that this code uses the 32-bit versions of the registers because the variables were declared as `int` rather than `long`.
 	  </script></section>
 
 	  <section data-markdown><script type="text/template">
